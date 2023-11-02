@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  StyleSheet,
   ActivityIndicator,
   FlatList,
   Text,
@@ -22,15 +21,15 @@ export default function ({ navigation }) {
   );
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-gray-100 py-2">
       <FlatList
         data={(data?.pages || []).reduce((acc, page) => acc.concat(page), [])}
         keyExtractor={(item, index) => `${item.name} - ${index}`}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={styles.listItem}
+            className="bg-white p-4 my-1 rounded-lg flex flex-row justify-between items-center shadow-md"
             onPress={() => navigation.navigate("Pokemon details", { id: item.id })}>
-            <Text style={styles.listItemText}>{item.name}</Text>
+            <Text className="text-xl font-bold">{item.name}</Text>
             <Text>➔</Text>
           </TouchableOpacity>
         )}
@@ -41,39 +40,10 @@ export default function ({ navigation }) {
         }}
         ListFooterComponent={() => {
           return isFetchingNextPage ? (
-            <ActivityIndicator style={styles.loadingIndicator} size="large" color="#007aff" />
+            <ActivityIndicator className="mt-4" size="large" color="#007aff" />
           ) : null;
         }}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f0f0f0",
-    padding: 16,
-  },
-  listItem: {
-    backgroundColor: "#fff",
-    padding: 16,
-    marginBottom: 8,
-    borderRadius: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  listItemText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  loadingIndicator: {
-    marginTop: 16,
-  },
-});

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 
 import * as PokemonsService from "../services/PokemonsService";
 import { PokemonDetailsItem } from "../types/PokemonTypes";
@@ -19,20 +19,20 @@ export default function ({ route }) {
   }, [id]);
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-gray-200 justify-start mt-3">
       {isLoading ? (
         <ActivityIndicator size="large" color="#007aff" testID="loading-indicator" />
       ) : (
-        <View style={styles.card}>
+        <View className="bg-white p-6 rounded-xl items-center shadow-md elevation-4">
           {pokemon ? (
             <>
-              <Text style={styles.title}>{pokemon.name}</Text>
-              <Text style={styles.label}>Height:</Text>
-              <Text style={styles.value} testID="height">
+              <Text className="text-2xl font-bold mb-4">{pokemon.name}</Text>
+              <Text className="text-xl font-bold">Height:</Text>
+              <Text className="text-xl mb-4" testID="height">
                 {pokemon.height} m
               </Text>
-              <Text style={styles.label}>Weight:</Text>
-              <Text style={styles.value} testID="weight">
+              <Text className="text-xl font-bold">Weight:</Text>
+              <Text className="text-xl mb-4" testID="weight">
                 {pokemon.weight} kg
               </Text>
             </>
@@ -44,44 +44,3 @@ export default function ({ route }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f0f0f0",
-    justifyContent: "flex-start",
-    marginTop: 12,
-  },
-  card: {
-    backgroundColor: "#fff",
-    padding: 24,
-    borderRadius: 16,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 16,
-  },
-  image: {
-    width: 120,
-    height: 120,
-    marginBottom: 16,
-  },
-  label: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  value: {
-    fontSize: 18,
-    marginBottom: 16,
-  },
-  loadingText: {
-    fontSize: 18,
-  },
-});
