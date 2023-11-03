@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { useInfiniteQuery } from "react-query";
 
 import * as PokemonsService from "../services/PokemonsService";

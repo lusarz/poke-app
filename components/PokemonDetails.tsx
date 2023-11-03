@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 
 import * as PokemonsService from "../services/PokemonsService";
-import { PokemonDetailsItem } from "../types/PokemonTypes";
+import { PokemonDetailsItem } from "../schemas/PokemonSchemas";
 
 export default function ({ route }) {
   const { id } = route.params;
