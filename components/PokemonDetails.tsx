@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, ActivityIndicator } from "react-native";
+import { useQuery } from "react-query";
 
 import * as PokemonsService from "../services/PokemonsService";
-import { PokemonDetailsItem } from "../schemas/PokemonSchemas";
 
 export default function ({ route }) {
   const { id } = route.params;
-  const [pokemon, setPokemon] = useState<PokemonDetailsItem | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    PokemonsService.fetchPokemon(id)
-      .then((data) => {
-        setPokemon(data);
-        setIsLoading(false);
-      })
-      .catch(() => setIsLoading(false));
-  }, [id]);
+  const { data: pokemon, isLoading, isError } = useQuery(
+    ["pokemon", id],
+    () => PokemonsService.fetchPokemon(id)
+  );
 
   return (
     <View className="flex-1 bg-gray-200 justify-start mt-3">
@@ -24,7 +18,7 @@ export default function ({ route }) {
         <ActivityIndicator size="large" color="#007aff" testID="loading-indicator" />
       ) : (
         <View className="bg-white p-6 rounded-xl items-center shadow-md elevation-4">
-          {pokemon ? (
+          {pokemon && !isError ? (
             <>
               <Text className="text-2xl font-bold mb-4">{pokemon.name}</Text>
               <Text className="text-xl font-bold">Height:</Text>
