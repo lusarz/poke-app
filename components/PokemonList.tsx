@@ -3,6 +3,7 @@ import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react
 import { useInfiniteQuery } from "react-query";
 
 import * as PokemonsService from "../services/PokemonsService";
+// import * as Settings from "expo-custom-module";
 
 export default function ({ navigation }) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery(
@@ -16,6 +17,7 @@ export default function ({ navigation }) {
 
   return (
     <View className="flex-1 bg-gray-100 py-2">
+      {/*<Text>{Settings.hello()}</Text>*/}
       <FlatList
         data={(data?.pages || []).reduce((acc, page) => acc.concat(page), [])}
         keyExtractor={(item, index) => `${item.name} - ${index}`}

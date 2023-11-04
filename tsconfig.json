@@ -2,7 +2,11 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "types": ["jest"],
-    "strict": true
+    "strict": true,
+    "paths": {
+      "expo-custom-module": ["./packages/expo-custom-module/src/index"],
+      "expo-custom-module/*": ["./packages/expo-custom-module/src/*"]
+    }
   },
   "include": ["**/*.test.tsx"]
 }
