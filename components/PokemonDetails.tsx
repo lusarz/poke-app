@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator } from "react-native";
 import { useQuery } from "react-query";
 
 import * as PokemonsService from "../services/PokemonsService";
+import { PillView } from "../modules/custom-views";
 
 export default function ({ route }) {
   const { id } = route.params;
@@ -17,7 +18,7 @@ export default function ({ route }) {
       {isLoading ? (
         <ActivityIndicator size="large" color="#007aff" testID="loading-indicator" />
       ) : (
-        <View className="bg-white p-6 rounded-xl items-center shadow-md elevation-4">
+        <View className="bg-white p-6 rounded-xl items-center shadow-md elevation-4 ">
           {pokemon && !isError ? (
             <>
               <Text className="text-2xl font-bold mb-4">{pokemon.name}</Text>
@@ -29,6 +30,11 @@ export default function ({ route }) {
               <Text className="text-xl mb-4" testID="weight">
                 {pokemon.weight} kg
               </Text>
+              <Text className="text-xl font-bold">Experience:</Text>
+              <PillView
+                value={pokemon.base_experience}
+                style={{ minHeight: 50, minWidth: 50, marginTop: 20 }}
+              />
             </>
           ) : (
             <Text>No data available</Text>

@@ -23,6 +23,7 @@ export const PokemonDetailsResponseSchema = z.object({
   id: z.number(),
   height: z.number(),
   weight: z.number(),
+  base_experience: z.number()
 });
 
 export type PokemonDetailsItem = z.infer<typeof PokemonDetailsResponseSchema>;
